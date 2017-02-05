@@ -35,6 +35,19 @@ var app = Consumer.create({
 
       console.log(util.inspect(data, false, null))
 
+      zipper.filterOutFiles= function(file){
+          //file.key
+          if(zippable.files && zippable.files.length > 0){
+            if(zippable.files.indexOf(file.Key)){
+              return file
+            }else{
+              return null
+            }
+          }
+
+          return file;
+      };
+
       zipper.zipToS3File ({
         s3FolderName: 'photos/' + zippable.folder
         , s3ZipFileName: hash + '.zip'
